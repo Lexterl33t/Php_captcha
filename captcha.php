@@ -58,7 +58,6 @@ class Captcha
         foreach ($text as $key => $char)
             imagettftext($this->img, rand(24, 35), rand(-25, 25), (20 + ($key * 40)), 100, $this->addRandomColor(), $this->getRandomFonts($fonts), $char);
 
-
         //imagestring($this->img, 20, 20, 0, implode($text, ""), $this->addRandomColor()); debugging line
     }
 
@@ -88,7 +87,6 @@ class Captcha
 
         for ($i = 0; $i <= rand(2, 5); $i++)
             call_user_func(array($this, $forms[rand(0, count($forms) - 1)]));
-
     }
 
     public function generate($witdh, $heigth)
@@ -108,8 +106,6 @@ class Captcha
 
 
         $this->return_image();
-
-
     }
 
     public function return_image()
