@@ -8,6 +8,7 @@ class Captcha
 {
 
     private $img;
+    private $code;
 
     public function generateRandomStrWithRandomSize()
     {
@@ -128,7 +129,7 @@ class Captcha
 
         $this->img = imagecreate($witdh, $heigth);
 
-        $generatedString = $this->generateRandomStrWithRandomSize();
+        $this->code = $this->generateRandomStrWithRandomSize();
 
         $back = $this->addRandomColor();
 
@@ -136,9 +137,9 @@ class Captcha
 
         $this->drawLinesOrCircles();
 
-        $_SESSION['captcha_code'] = $generatedString;
-
         $this->return_image();
+        
+        return $this;
     }
 
     public function return_image()
@@ -146,7 +147,10 @@ class Captcha
         imagepng($this->img);
     }
 
-
+    public function getCode() 
+    {
+        return $this->code;
+    }
 }
 
 
