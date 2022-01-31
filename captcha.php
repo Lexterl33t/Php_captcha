@@ -20,7 +20,11 @@ class Captcha
 
     public function addRandomColor()
     {
-        return imagecolorallocate($this->img, rand(1, 100), rand(1, 100), rand(1, 100));
+        return imagecolorallocate($this->img,
+            rand(1, 100),
+            rand(1, 100),
+            rand(1, 100)
+        );
     }
 
     public function getFonts()
@@ -56,25 +60,54 @@ class Captcha
         $fonts = $this->getFonts();
 
         foreach ($text as $key => $char)
-            imagettftext($this->img, rand(24, 35), rand(-25, 25), (20 + ($key * 40)), 100, $this->addRandomColor(), $this->getRandomFonts($fonts), $char);
+            imagettftext($this->img,
+                rand(24, 35),
+                rand(-25, 25),
+                (20 + ($key * 40)),
+                100,
+                $this->addRandomColor(),
+                $this->getRandomFonts($fonts),
+                $char
+            );
+
 
         //imagestring($this->img, 20, 20, 0, implode($text, ""), $this->addRandomColor()); debugging line
     }
 
     public function drawLine()
     {
-        imageline($this->img, (20 + rand(10, 300)), rand(70, 200), (20 + rand(10, 300)), rand(70, 200), $this->addRandomColor());
+        imageline($this->img,
+            (20 + rand(10, 300)),
+            rand(70, 200),
+            (20 + rand(10, 300)),
+            rand(70, 200),
+            $this->addRandomColor()
+        );
     }
 
     public function drawCircle()
     {
         $circle = rand(50, 100);
-        imagearc($this->img, (20 + rand(10, 300)), rand(70, 200), $circle, $circle, 0, 360, $this->addRandomColor());
+        imagearc($this->img,
+            (20 + rand(10, 300)),
+            rand(70, 200),
+            $circle,
+            $circle,
+            0,
+            360,
+            $this->addRandomColor()
+        );
     }
 
     public function drawSquare()
     {
-        imagerectangle($this->img, (20 + rand(10, 300)), rand(70, 200), (20 + rand(10, 300)), rand(70, 200), $this->addRandomColor());
+        imagerectangle($this->img,
+            (20 + rand(10, 300)),
+            rand(70, 200),
+            (20 + rand(10, 300)),
+            rand(70, 200),
+            $this->addRandomColor()
+        );
     }
 
     public function drawLinesOrCircles()
@@ -87,6 +120,7 @@ class Captcha
 
         for ($i = 0; $i <= rand(2, 5); $i++)
             call_user_func(array($this, $forms[rand(0, count($forms) - 1)]));
+
     }
 
     public function generate($witdh, $heigth)
@@ -103,7 +137,6 @@ class Captcha
         $this->drawLinesOrCircles();
 
         $_SESSION['captcha_code'] = $generatedString;
-
 
         $this->return_image();
     }
