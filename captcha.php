@@ -129,8 +129,8 @@ class Captcha
 
         $this->img = imagecreate($witdh, $heigth);
 
-        $this->code = $this->generateRandomStrWithRandomSize();
-
+        $generatedString = $this->generateRandomStrWithRandomSize();
+        $_SESSION['code'] = $generatedString;
         $back = $this->addRandomColor();
 
         $this->writeString($generatedString);
